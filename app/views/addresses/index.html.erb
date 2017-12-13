@@ -2,9 +2,10 @@ Address for <%= @student.name %>
 
 <%@addresses.each do |address| %>
 <ul>
-  <li>Description: <%= address.Description %></li>
+  <li>Description: <%= address.description %></li>
   <li>Street: <%= address.street %></li>
   <li>City: <%= address.city %></li>
   <li>State: <%= address.state %></li>
   <li>Zip Code: <%= address.zip_code %></li>
 </ul>
+<% end %>

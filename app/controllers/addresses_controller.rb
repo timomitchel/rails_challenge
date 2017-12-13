@@ -1,6 +1,6 @@
 class AddressesController < ApplicationController
      before_action :set_address, only: [:show, :destroy, :edit, :update]
-     before_action :set_student, only: [:create, :index, :create]
+     before_action :set_student, only: [:create, :index, :create, :new]
   
   def index
     @addresses = @student.addresses
@@ -9,7 +9,7 @@ class AddressesController < ApplicationController
   def create
     @address = @student.addresses.new(address_params)
     if @address.save
-      flash[:success] = "#{@address.name} added"
+      flash[:success] = "#{@address.description} added"
       redirect_to student_addresses_path(@student, @address)
     else
       render :new
