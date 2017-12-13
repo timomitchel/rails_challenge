@@ -6,11 +6,17 @@ class StudentsController < ApplicationController
   end
 
   def create
-    @student = Student.create(params[:student])
+    @student = Student.create(student_params)
+    if @student.save
+      flash[:success] = "#{@student.name} added"
+      redirect_to student_path(@student)
+    else
+      render :new
+    end
   end
 
   def new
-
+    @student = Student.new
   end
 
   def edit
@@ -34,6 +40,10 @@ class StudentsController < ApplicationController
 
   def set_student
     @student = Student.find(params[:id])
+  end
+
+  def student_params
+    params.require(:student).permit(:name)
   end
 
 end
