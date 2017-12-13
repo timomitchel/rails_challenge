@@ -6,7 +6,7 @@ class AddressesController < ApplicationController
   end
 
   def create
-    @address = Address.create(student_params)
+    @address = Address.create(address_params)
     if @address.save
       flash[:success] = "#{@address.name} added"
       redirect_to student_address_path(@address)
