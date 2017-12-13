@@ -1,15 +1,16 @@
 class AddressesController < ApplicationController
      before_action :set_address, only: [:show, :destroy, :edit, :update]
+     before_action :set_student, only: [:create, :index, :create]
   
   def index
-    @addresses = Address.all
+    @addresses = @student.addresses
   end
 
   def create
-    @address = Address.create(address_params)
+    @address = @student.addresses.new(address_params)
     if @address.save
       flash[:success] = "#{@address.name} added"
-      redirect_to student_address_path(@address)
+      redirect_to student_addresses_path(@student, @address)
     else
       render :new
     end
@@ -31,7 +32,7 @@ class AddressesController < ApplicationController
     @address.update(student_params)
     if @address.save
       flash[:success] = "#{@address.name} updated"
-      redirect_to student_address_path(@address)
+      redirect_to student_addresses_path(@student)
     else
       render :edit
     end
@@ -51,7 +52,11 @@ class AddressesController < ApplicationController
     @address = Address.find(params[:id])
   end
 
-  def student_params
+  def set_student
+    @student = Student.find(params[:student_id])
+  end
+
+  def address_params
     params.require(:address).permit(:description, :street, :state, :city, :zip_code, :student_id)
   end
 end
