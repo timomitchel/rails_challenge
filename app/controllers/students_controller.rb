@@ -7,7 +7,9 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.create(student_params)
+    @course = Course.find(params[:course][:course_id])
     if @student.save
+      @course.student << @student
       flash[:success] = "#{@student.name} added"
       redirect_to student_path(@student)
     else
@@ -16,6 +18,7 @@ class StudentsController < ApplicationController
   end
 
   def new
+    @course = Course.all
     @student = Student.new
   end
 
