@@ -31,7 +31,7 @@ class StudentsController < ApplicationController
     @student.update(student_params)
     if @student.save
       flash[:success] = "#{@student.name} updated"
-      redirect student_path(@student)
+      redirect_to student_path(@student)
     else
       render :edit
     end
