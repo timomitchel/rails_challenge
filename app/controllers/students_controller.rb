@@ -28,11 +28,20 @@ class StudentsController < ApplicationController
   end
 
   def update
-
+    @student.update(student_params)
+    if @student.save
+      flash[:success] = "#{@student.name} updated"
+      redirect student_path(@student)
+    else
+      render :edit
+    end
   end
 
   def destroy
+    @student.destroy
 
+    flash[:success] = "#{@student.name} deleted"
+    redirect_to students_path
   end
 
 
