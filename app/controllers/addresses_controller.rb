@@ -29,10 +29,10 @@ class AddressesController < ApplicationController
   end
 
   def update
-    @address.update(student_params)
+    @address.update(address_params)
     if @address.save
       flash[:success] = "#{@address.name} updated"
-      redirect_to student_addresses_path(@student)
+      redirect_to student_address_path(@address.student, @address)
     else
       render :edit
     end
