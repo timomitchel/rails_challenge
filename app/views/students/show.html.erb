@@ -1,5 +1,7 @@
 <h1><%= @student.name %></h1>
 
 <%= render partial: 'addresses/form' %>
+<%= render partial: 'courses/form' %>
+
 <%= link_to "Create Student", new_student_path %>
 <%= link_to "All Students", students_path %>

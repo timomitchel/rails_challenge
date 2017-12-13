@@ -27,7 +27,7 @@ class StudentsController < ApplicationController
   end
 
   def show
-
+    @courses = Course.find(params[:course][:course_id])
   end
 
   def update
